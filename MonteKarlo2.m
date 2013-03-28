@@ -6,6 +6,7 @@ b=10;
 n=2;%dimensija
 k=100;%tasku (vektoriu)skaicius
 x= a + (b-a).*rand(100,n); %perdaryti kad generuotu dvimacius
+f=[];
 for i=1:k
     f(i)=sincos2(x(i,:));
 end
