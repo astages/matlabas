@@ -1,34 +1,54 @@
 % Monte Karlo (Random search)metodo realizacija
 % Sugeneruojame 100 atsitiktiniu tasku [-10;10]^2
 % Surandame, kuriame funkcija igyja didziausia (maziausia) reiksme
-a=-10;
-b=10;
-n=2;%dimensija
-k1=60;%tasku (vektoriu)skaicius
-x= a + (b-a).* rand(100,n); % generuoja dvimacius
-f=[];
+a1=-10; %pradine (pilna) sritis
+b1=10;  %pradine (pilna) sritis
+n=2;    %dimensija
+k1=50;  %tasku (vektoriu)skaicius
+x1= a1 + (b1-a1).* rand(k1,n); % generuoja dvimacius
+f1=[];
+hold on;
 for i=1:k1
-f(i)=sincos2(x(i,:));
+f1(i)=sincos2(x1(i,:));
 end
-[fMin,indMin] = min(f);
-[fMax,indMax] = max(f);
-xMin = x(indMin,:); %pritaikytas dvimaciui
-xMax = x(indMax,:);%pritaikytas dvimaciui
-fprintf('surastas min=%6.4f, taske x=(%6.4f, %6.4f)\n',fMin,xMin(1),xMin(2));
-%fprintf('surastas max=%6.4f, taske x=(%6.4f, %6.4f)\n',fMax,xMax(1),xMax(2));
-grafika2
- 
-c=xMin(1)-1;
-d=xMin(2)+1;
-k2=40;
-x2= c + (d-c).* rand(100,n); % generuoja dvimacius
+[fMin1,indMin1] = min(f1);
+%[fMax1,indMax1] = max(f1);
+%surandame kurioje eiluteje musu ieskoma reiksme
+xMin1 = x1(indMin1,:); %pritaikytas dvimaciui paiima visa eilute su abiem reiksmem
+%xMax1 = x1(indMax1,:);%pritaikytas dvimaciui paiima visa eilute su abiem reiksmem
+fprintf('surastas min1=%6.4f, taske x1=(%6.4f, %6.4f)\n',fMin1,xMin1(1),xMin1(2));
+%fprintf('surastas max1=%6.4f, taske x1=(%6.4f, %6.4f)\n',fMax1,xMax1(1),xMax1(2));
+%grafika2
+
+%visus grafikus brezia i viena
+scatter(x1(:,1),x1(:,2),'b.');
+scatter(xMin1(1),xMin1(2),'r*');
+text(xMin1(1)+0.3,xMin1(2),num2str(fMin1));
+rectangle('Position', [-10.0,-10.0,20.0,20.0],...
+   'LineWidth',5,'LineStyle','--')
+
+
+%kitus 50 bandymu atliekame sumazintoje srityje
+k2=50;
+a2=xMin1(1)-4; %sumazinta sritis
+b2=xMin1(1)+4; %sumazinta sritis
+a3=xMin1(2)-4; %sumazinta sritis
+b3=xMin1(2)+4; %sumazinta sritis
+x2(:,1)= a2+ (b2-a2).* rand(k2,1); % generuoja dvimacius; 
+x2(:,2)= a3 + (b3-a3).* rand(k2,1);
+
 f2=[];
-for ii=1:k2
-f2(ii)=sincos2(x2(ii,:));
+for i=1:k2
+f2(i)=sincos2(x2(i,:));
 end
-[f2Min2,indMin2] = min(f2);
-%[f2Max2,indMax2] = max(f2);
-x2Min2 = x2(indMin2,:); %pritaikytas dvimaciui
-%x2Max2 = x2(indMax2,:);%pritaikytas dvimaciui
-fprintf('surastas min=%6.4f, taske x=(%6.4f, %6.4f)\n',f2Min2,x2Min2(1),x2Min2(2));
-%fprintf('surastas max=%6.4f, taske x=(%6.4f, %6.4f)\n',f2Max2,x2Max2(1),x2Max2(2));
+[fMin2,indMin2] = min(f2);
+%[fMax2,indMax2] = max(f2);
+xMin2 = x2(indMin2,:); %pritaikytas dvimaciui
+%xMax = x2(indMax2,:);%pritaikytas dvimaciui
+fprintf('surastas min2=%6.4f, taske x2=(%6.4f, %6.4f)\n',f2Min2,xMin2(1),xMin2(2));
+%fprintf('surastas max2=%6.4f, taske x2=(%6.4f, %6.4f)\n',f2Max2,xMax2(1),xMax2(2));
+scatter(x2(:,1),x2(:,2),'y.');
+scatter(xMin2(1),xMin2(2),'g*');
+text(xMin2(1)+0.3,xMin2(2),num2str(fMin2));
+rectangle('Position', [xMin1(1)-4,xMin1(2)-4,8.0, 8.0],...
+  'LineWidth',2,'LineStyle','--')
