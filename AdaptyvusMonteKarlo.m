@@ -8,9 +8,9 @@ fMin2Visos = [];
 %[fMin2,xMin2]= AdaptyvusMonteKarlo(funkcija,a1,b1)
 %a1=-10; %pradine (pilna) sritis
 %b1=10;  %pradine (pilna) sritis
-for ii=1:100
+for ii=1:10
     n=2;    %dimensija
-    k1=50;  %tasku (vektoriu)skaicius
+    k1=80;  %tasku (vektoriu)skaicius
     x1= a1 + (b1-a1).* rand(k1,n); % generuoja dvimacius
     f1=[];
     hold on;
@@ -34,7 +34,7 @@ for ii=1:100
     rectangle('Position', [-10.0,-10.0,20.0,20.0],...
         'LineWidth',5,'LineStyle','--')
     %kitus 50 bandymu atliekame sumazintoje srityje
-    k2=50;
+    k2=20;
     a2=xMin1(1)-4; %sumazinta sritis x /kaire
     b2=xMin1(1)+4; %sumazinta sritis y /desine
     a3=xMin1(2)-4; %sumazinta sritis x /apacia
